@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Placeholder">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#E4DACB"/>
+      <stop offset="1" stop-color="#CFC0AA"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="1000" fill="url(#g2)"/>
+
+  <g fill="none" stroke="#B08D57" opacity="0.34">
+    <circle cx="345" cy="430" r="92" stroke-width="1.4"/>
+    <circle cx="455" cy="430" r="92" stroke-width="1.4"/>
+    <path d="M250 700 h300" stroke-width="1"/>
+  </g>
+
+  <g text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" fill="#7E6B52">
+    <text x="400" y="820" font-size="34" letter-spacing="8" opacity="0.85">ՁԵՐ ԼՈՒՍԱՆԿԱՐԸ</text>
+    <text x="400" y="868" font-size="21" letter-spacing="2" opacity="0.6">img/story-2.jpg</text>
+  </g>
+</svg>

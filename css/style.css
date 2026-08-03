@@ -1,0 +1,800 @@
+/* =============================================================
+   Wedding invitation — minimal editorial
+   Palette: sky-tinted white / deep sky-navy. Minimal, no ornament.
+   ============================================================= */
+
+:root{
+  /* ============ ՓՈԽԵԼ / EDIT: գունային թեման ============
+     Ամբողջ կայքի գույները գալիս են այս վեց արժեքից։
+     --paper-rgb-ը նույն --paper-ն է, բայց թվերով, որպեսզի
+     թափանցիկ շերտերը (topbar, footer) նույնպես հետևեն թեմային։ */
+  --paper:     #F3F8FD;   /* երկնագույն երանգով գրեթե սպիտակ */
+  --paper-rgb: 243,248,253;
+  --paper-2:   #E6F0F9;   /* այլընտրանքային հատվածների ֆոն */
+  --white:     #FFFFFF;
+
+  --ink:     #17364F;     /* խորը երկնագույն — վերնագրեր, կոճակներ */
+  --ink-2:   #345770;     /* հիմնական տեքստ */
+  /* Բավական մուգ, որ մանր տեքստը (10–15px պիտակներ, հասցեներ)
+     անցնի WCAG AA 4.5:1 շեմը բաց ֆոնի վրա։ Ավելի բաց երանգը
+     գեղեցիկ էր, բայց հեռախոսի արևի տակ չէր կարդացվում։ */
+  --muted:   #52708B;     /* երկրորդական — 4.85:1 */
+  --line:    #D4E4F1;
+  --line-2:  #B6CFE3;
+  /* Միայն դեկորատիվ կետերի համար է (ոչ տեքստ) — 3.27:1-ը
+     բավարարում է ոչ-տեքստային տարրերի 3:1 պահանջը։ */
+  --accent:  #4E8FC0;
+
+  --danger:  #A8544A;
+
+  /* Լատինատառը վերցվում է Cormorant-ից, հայերենը՝ Noto Serif Armenian-ից։
+     Երկուսը միասին տալիս են բնօրինակի նուրբ serif-ի զգացողությունը։ */
+  --serif:  'Cormorant Garamond', 'Noto Serif Armenian', 'Sylfaen', Georgia, serif;
+  --sans:   'Noto Sans Armenian', 'Sylfaen', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --script: 'Parisienne', 'Cormorant Garamond', cursive;
+
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{
+  -webkit-text-size-adjust:100%;
+  scroll-behavior:smooth;
+  scroll-padding-top:72px;
+}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink-2);
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:18px;
+  line-height:1.8;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+
+  /* Cormorant-ը լռելյայն «հին ոճի» թվանշաններ է տալիս՝ տարբեր
+     բարձրության, մի մասը գծից ցած։ Ամբողջ էջում անցնում ենք
+     հավասար բարձրության թվանշանների։ */
+  font-variant-numeric:lining-nums;
+  font-feature-settings:'lnum' 1;
+}
+
+img{ max-width:100%; height:auto; display:block; }
+button{ font:inherit; color:inherit; }
+
+::selection{ background:var(--ink); color:var(--paper); }
+
+
+/* ---------------------------------------------------------
+   Layout
+   --------------------------------------------------------- */
+.wrap{
+  width:100%;
+  max-width:1080px;
+  margin-inline:auto;
+  padding-inline:24px;
+}
+.wrap--narrow{ max-width:660px; }
+
+.section{ padding-block:clamp(76px,11vw,140px); }
+.section--alt{ background:var(--paper-2); }
+
+.section__head{ text-align:center; margin-bottom:clamp(44px,6vw,70px); }
+.section__note{
+  margin:16px auto 0;
+  max-width:46ch;
+  color:var(--muted);
+  font-size:16px;
+}
+
+
+/* ---------------------------------------------------------
+   Typography — երկու ոճ՝ լայն տարածությամբ ՄԵԾԱՏԱՌ և ձեռագիր
+   --------------------------------------------------------- */
+.eyebrow{
+  margin:0 0 18px;
+  font-family:var(--sans);
+  font-size:10.5px;
+  font-weight:400;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.h2{
+  margin:0;
+  font-family:var(--serif);
+  font-weight:300;
+  font-size:clamp(28px,5vw,42px);
+  line-height:1.28;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+
+.lead{
+  margin:0 0 18px;
+  font-weight:400;
+  font-size:clamp(17px,2.2vw,19.5px);
+  line-height:1.9;
+  color:var(--ink-2);
+  text-align:center;
+}
+.lead:last-child{ margin-bottom:0; }
+
+.label{
+  display:block;
+  font-family:var(--sans);
+  font-size:10px;
+  font-weight:400;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--muted);
+  padding:0;
+}
+.hint{ font-family:var(--sans); font-size:12px; color:var(--muted); letter-spacing:.04em; }
+.hint--max{ margin:12px 0 0; }
+
+.err{
+  margin:12px 0 0;
+  font-family:var(--sans);
+  font-size:13px;
+  color:var(--danger);
+}
+.err--center{ text-align:center; }
+
+
+/* ---------------------------------------------------------
+   Rule — բարակ գիծ, առանց զարդի
+   --------------------------------------------------------- */
+.rule{
+  display:flex; align-items:center; justify-content:center;
+  gap:10px;
+  margin:22px auto;
+  max-width:150px;
+}
+.rule span{ flex:1; height:1px; background:var(--line-2); }
+.rule i{ width:4px; height:4px; flex:none; border-radius:50%; background:var(--accent); }
+
+
+/* ---------------------------------------------------------
+   Buttons
+   --------------------------------------------------------- */
+.btn{
+  position:relative;
+  display:inline-flex; align-items:center; justify-content:center;
+  gap:8px;
+  padding:16px 36px;
+  border:1px solid var(--ink);
+  border-radius:0;
+  background:transparent;
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:10.5px;
+  font-weight:400;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  text-decoration:none;
+  cursor:pointer;
+  overflow:hidden;
+
+  /* Լցոնումը background է, ոչ թե ::before շերտ։
+     ::before-ը ծածկում էր տեքստը այն կոճակների վրա, որոնց
+     պիտակը պարզ տեքստ է (առանց <span>-ի) — hover-ի ժամանակ
+     գրությունը անհետանում էր։ Background-ը միշտ նկարվում է
+     տեքստի ՀԵՏԵՎՈՒՄ՝ անկախ markup-ից։ */
+  background-image:linear-gradient(var(--ink),var(--ink));
+  background-repeat:no-repeat;
+  background-size:0% 100%;
+  background-position:right center;
+  transition:background-size .45s var(--ease), color .4s var(--ease);
+}
+.btn:hover, .btn:focus-visible{
+  background-size:100% 100%;
+  background-position:left center;
+  color:var(--paper);
+}
+
+.btn--solid{
+  background-color:var(--ink);
+  background-image:linear-gradient(var(--white),var(--white));
+  color:var(--paper);
+}
+.btn--solid:hover, .btn--solid:focus-visible{ color:var(--ink); }
+
+.btn--ghost{ border-color:var(--line-2); color:var(--ink-2); }
+
+.btn--sm{ padding:12px 22px; font-size:9.5px; letter-spacing:.2em; }
+
+.btn:disabled{ opacity:.45; cursor:default; background-size:0% 100%; }
+
+.btn__spin{
+  display:none;
+  width:13px; height:13px;
+  border:1.5px solid rgba(var(--paper-rgb),.35);
+  border-top-color:var(--paper);
+  border-radius:50%;
+  animation:spin .7s linear infinite;
+}
+.btn.is-loading .btn__spin{ display:block; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+
+/* ---------------------------------------------------------
+   Topbar
+   --------------------------------------------------------- */
+.topbar{
+  position:fixed; inset:0 0 auto 0;
+  z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px;
+  padding:13px clamp(18px,4vw,42px);
+  background:rgba(var(--paper-rgb),.9);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  transform:translateY(-105%);
+  transition:transform .5s var(--ease);
+}
+.topbar.is-visible{ transform:translateY(0); }
+
+.topbar__brand{
+  font-family:var(--serif);
+  font-size:17px; font-weight:400;
+  letter-spacing:.26em;
+  color:var(--ink);
+  text-decoration:none;
+}
+.topbar__nav{ display:flex; align-items:center; gap:clamp(12px,3vw,26px); }
+.topbar__nav a{
+  font-family:var(--sans);
+  font-size:10px; font-weight:400;
+  letter-spacing:.24em; text-transform:uppercase;
+  color:var(--ink-2); text-decoration:none;
+  transition:opacity .25s var(--ease);
+}
+.topbar__nav a:hover{ opacity:.55; }
+.topbar__cta{
+  padding:9px 18px;
+  border:1px solid var(--ink);
+  color:var(--ink) !important;
+  transition:background .3s var(--ease), color .3s var(--ease);
+}
+.topbar__cta:hover{ background:var(--ink); color:var(--paper) !important; opacity:1; }
+
+
+/* ---------------------------------------------------------
+   HERO — մաքուր տպագիր հրավեր, առանց լուսանկարի
+   --------------------------------------------------------- */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+  padding:110px 24px 108px;
+  background:var(--paper);
+}
+.hero__card{ width:100%; max-width:600px; }
+
+
+/* Ձեռագիր տողը՝ երկու կողմից երկար բարակ գծերով, ինչպես
+   կալիգրաֆիայի ներածող/ելքային հարվածները բնօրինակում։ */
+/* Սիրտը inline է՝ որպեսզի հետևի տեքստին և մնա վերջին տողի կողքին,
+   երբ գրությունը փաթաթվում է երկու տողի (ինչպես բնօրինակում)։ */
+/* Այժմ սա <h1> է (անունները էջի գլխավոր վերնագիրն են),
+   ուստի զրոյացնում ենք browser-ի լռելյայն margin/weight-ը։ */
+.hero__script{
+  margin:0;
+  font-weight:400;
+  line-height:1.05;
+}
+.hero__scriptText{
+  font-family:var(--script);
+  font-weight:400;
+  font-size:clamp(46px,12.5vw,96px);
+  color:var(--ink);
+  line-height:1.06;
+}
+.hero__heart{
+  display:inline-block;
+  vertical-align:middle;
+  width:clamp(15px,3.2vw,24px);
+  height:auto;
+  color:var(--ink);
+  margin-left:.12em;
+  margin-bottom:.5em;
+}
+
+
+
+/* --- ամսաթվի տողը՝ գծերով, ինչպես բնօրինակում --- */
+.dateline{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  gap:0 clamp(12px,3vw,24px);
+  margin:clamp(30px,5vw,44px) auto 0;
+  max-width:430px;
+}
+.dateline__side{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+}
+.dateline__rule{ width:100%; height:1px; background:var(--ink); }
+.dateline__word{
+  /* Noto-ն առաջինն է, որպեսզի «Շաբաթ»-ը և «14:00»-ը նույն
+     բարձրության թվանշաններով ու քաշով լինեն։ Cormorant-ի
+     հին ոճի թվանշանները կողքին շատ մանր են երևում։ */
+  font-family:'Noto Serif Armenian', var(--serif);
+  font-weight:400;
+  font-size:clamp(13px,2.2vw,16px);
+  letter-spacing:.06em;
+  color:var(--ink);
+  white-space:nowrap;
+}
+.dateline__mid{ display:flex; flex-direction:column; align-items:center; line-height:1.1; }
+.dateline__month{
+  font-family:var(--sans);
+  font-size:clamp(9.5px,1.9vw,11.5px);
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+.dateline__day{
+  font-family:var(--serif);
+  font-size:clamp(38px,9vw,64px);
+  font-weight:400;
+  line-height:1.02;
+  color:var(--ink);
+  font-variant-numeric:tabular-nums lining-nums;
+  font-feature-settings:'lnum' 1, 'tnum' 1;
+}
+
+
+.hero__btn{ margin-top:clamp(30px,5vw,42px); }
+
+.hero__scroll{
+  position:absolute; left:50%; bottom:26px;
+  transform:translateX(-50%);
+  width:1px; height:46px;
+  background:var(--line-2);
+  overflow:hidden;
+}
+.hero__scroll span{
+  position:absolute; inset:0;
+  background:var(--ink);
+  animation:trickle 2.6s var(--ease) infinite;
+}
+@keyframes trickle{
+  0%{ transform:translateY(-100%); }
+  60%,100%{ transform:translateY(100%); }
+}
+
+
+/* ---------------------------------------------------------
+   Gallery — ձեր լուսանկարները, հերոսից անմիջապես հետո
+   --------------------------------------------------------- */
+.gallery{ padding-block:clamp(10px,3vw,40px) clamp(60px,9vw,110px); }
+
+.gallery__grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+}
+
+/* Բազային կանոնը պետք է media query-ից ԱՌԱՋ լինի — հակառակ դեպքում
+   margin:0-ը չեղարկում է --offset-ի margin-top-ը (նույն specificity,
+   հաղթում է վերջինը)։ */
+.gallery__item{ margin:0; overflow:hidden; background:var(--paper-2); }
+
+@media (min-width:720px){
+  .gallery__grid{ grid-template-columns:repeat(3,1fr); gap:clamp(14px,2.2vw,26px); align-items:start; }
+  .gallery__item--offset{ margin-top:clamp(26px,5vw,64px); }
+}
+.gallery__item img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  /* Զույգի լուսանկարները բնօրինակում արդեն սև-սպիտակ են։
+     grayscale-ը միայն հավասարեցնում է երանգը (մեկը սեպիա էր),
+     պայծառությունը չի փոխում — չափված է՝ 153→153, 141→141։ */
+  filter:grayscale(1);
+  transition:transform .8s var(--ease);
+}
+.gallery__item:hover img{ transform:scale(1.035); }
+
+
+/* ---------------------------------------------------------
+   Countdown
+   --------------------------------------------------------- */
+.countdown{ text-align:center; padding-block:clamp(58px,8vw,92px); }
+.countdown__grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:clamp(4px,2vw,20px);
+  max-width:600px;
+  margin-inline:auto;
+}
+.cd{
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  padding:8px 4px;
+  position:relative;
+}
+.cd + .cd::before{
+  content:"";
+  position:absolute; left:0; top:22%; bottom:22%;
+  width:1px; background:var(--line);
+}
+.cd__num{
+  font-family:var(--serif);
+  font-size:clamp(34px,8.4vw,58px);
+  font-weight:400;
+  line-height:1;
+  /* Cormorant-ը լռելյայն հին ոճի թվանշաններ ունի (3-ը, 5-ը իջնում են
+     գծից ցած)։ lining-nums-ը դրանք դարձնում է հավասար բարձրության։ */
+  font-variant-numeric:tabular-nums lining-nums;
+  font-feature-settings:'lnum' 1, 'tnum' 1;
+  color:var(--ink);
+}
+.cd__label{
+  font-family:var(--sans);
+  font-size:9.5px;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+@media (max-width:430px){
+  .cd__label{ font-size:8.5px; letter-spacing:.06em; }
+}
+/* Հայերեն տեքստ՝ ուստի serif, ոչ թե ձեռագիր տառատեսակը։
+   Parisienne-ը հայերեն տառեր չունի և կփոխարինվեր պատահական
+   համակարգային տառատեսակով։ */
+.countdown__done{
+  font-family:var(--serif);
+  font-size:clamp(24px,5vw,38px);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink);
+  margin:0;
+}
+
+
+/* ---------------------------------------------------------
+   Invitation
+   --------------------------------------------------------- */
+.invite__intro{ text-align:center; }
+
+
+/* ---------------------------------------------------------
+   Schedule timeline
+   --------------------------------------------------------- */
+.timeline{
+  list-style:none;
+  margin:0 auto;
+  padding:0;
+  max-width:740px;
+  position:relative;
+}
+.timeline::before{
+  content:"";
+  position:absolute;
+  left:5px; top:12px; bottom:12px;
+  width:1px;
+  background:var(--line-2);
+}
+@media (min-width:640px){ .timeline::before{ left:124px; } }
+
+.tl{
+  position:relative;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:10px;
+  padding:0 0 46px 32px;
+}
+.tl:last-child{ padding-bottom:0; }
+.tl::before{
+  content:"";
+  position:absolute;
+  left:2px; top:13px;
+  width:8px; height:8px;
+  border-radius:50%;
+  background:var(--accent);
+  z-index:1;
+}
+@media (min-width:640px){
+  .tl{ grid-template-columns:108px 1fr; gap:0 54px; padding-left:0; }
+  .tl::before{ left:121px; }
+}
+
+.tl__time{
+  font-family:var(--serif);
+  font-size:clamp(22px,3.4vw,28px);
+  font-weight:400;
+  line-height:1.3;
+  letter-spacing:.08em;
+  color:var(--ink);
+  font-variant-numeric:tabular-nums;
+}
+@media (min-width:640px){ .tl__time{ text-align:right; padding-top:2px; } }
+
+.tl__body{ min-width:0; background:var(--white); }
+.tl__photo{
+  width:100%;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  display:block;
+  background:var(--paper-2);
+  /* Վայրերի լուսանկարները ԳՈՒՆԱՎՈՐ են։
+     Սև-սպիտակի վերածելիս Սաղմոսավանքը մգանում էր՝ բնօրինակի
+     միջին պայծառությունը ընդամենը 97/255 է (փոթորկոտ երկինք),
+     և առանց գույնի այն դառնում էր պարզապես մռայլ։
+     Թեթև պայծառացումը վերականգնում է օդայնությունը։ */
+  filter:brightness(1.06) saturate(1.04);
+}
+.tl__text{ padding:22px 20px 24px; }
+@media (min-width:520px){ .tl__text{ padding:26px 28px 28px; } }
+
+.tl__title{
+  margin:0 0 6px;
+  font-family:var(--serif);
+  font-weight:400;
+  font-size:clamp(17px,2.6vw,21px);
+  line-height:1.35;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+.tl__venue{ margin:0; color:var(--ink-2); font-size:17px; }
+.tl__addr{ margin:2px 0 0; color:var(--muted); font-size:15px; }
+
+.tl__maps{ display:flex; flex-wrap:wrap; gap:10px; margin-top:18px; }
+
+.maplink{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:11px 18px;
+  border:1px solid var(--line-2);
+  background:transparent;
+  color:var(--ink-2);
+  font-family:var(--sans);
+  font-size:10.5px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  text-decoration:none;
+  transition:border-color .3s var(--ease), color .3s var(--ease),
+             background .3s var(--ease);
+}
+.maplink svg{ width:14px; height:14px; flex:none; }
+.maplink:hover{ background:var(--ink); border-color:var(--ink); color:var(--paper); }
+
+/* Նեղ էկրաններին կոճակներն ամբողջ լայնությամբ են՝ մեծ սեղմելու տարածք։ */
+@media (max-width:479px){
+  .tl__maps{ display:grid; grid-template-columns:1fr; gap:8px; }
+  .maplink{ justify-content:center; padding:13px 16px; }
+}
+
+
+/* ---------------------------------------------------------
+   Card / Form
+   --------------------------------------------------------- */
+.card{
+  background:var(--white);
+  padding:clamp(28px,5vw,52px);
+}
+
+.form__block{ border:0; margin:0 0 34px; padding:0; }
+.form__block:last-of-type{ margin-bottom:26px; }
+
+.form__blockhead{
+  display:flex; align-items:baseline; justify-content:space-between;
+  gap:12px; margin-bottom:16px;
+}
+
+/* --- attending choice --- */
+.choice{ display:grid; gap:12px; margin-top:16px; }
+@media (min-width:560px){ .choice{ grid-template-columns:1fr 1fr; } }
+
+.choice__opt{ display:block; cursor:pointer; }
+.choice__opt input{
+  position:absolute; width:1px; height:1px; opacity:0; pointer-events:none;
+}
+.choice__box{
+  display:flex; align-items:center; gap:12px;
+  padding:17px 20px;
+  border:1px solid var(--line);
+  background:var(--paper);
+  transition:border-color .3s var(--ease), background .3s var(--ease);
+  height:100%;
+}
+.choice__mark{
+  flex:none;
+  width:17px; height:17px;
+  border:1px solid var(--line-2);
+  border-radius:50%;
+  position:relative;
+  transition:border-color .3s var(--ease);
+}
+.choice__mark::after{
+  content:"";
+  position:absolute; inset:3px;
+  border-radius:50%;
+  background:var(--ink);
+  transform:scale(0);
+  transition:transform .28s var(--ease);
+}
+.choice__text{ font-size:16.5px; line-height:1.45; color:var(--ink); }
+
+.choice__opt:hover .choice__box{ border-color:var(--line-2); }
+.choice__opt input:focus-visible + .choice__box{ outline:2px solid var(--ink); outline-offset:2px; }
+.choice__opt input:checked + .choice__box{ border-color:var(--ink); background:var(--white); }
+.choice__opt input:checked + .choice__box .choice__mark{ border-color:var(--ink); }
+.choice__opt input:checked + .choice__box .choice__mark::after{ transform:scale(1); }
+
+/* --- guest rows --- */
+.guests{ display:grid; gap:24px; margin-bottom:18px; }
+@media (min-width:520px){ .guests{ gap:14px; } }
+
+/* Համարն ու ջնջելու կոճակը հավասարեցվում են առաջին դաշտին, որպեսզի
+   նեղ էկրաններին, երբ դաշտերը դասավորվում են իրար տակ, դրանք
+   մնան տողի վերևում։ */
+.guest{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:start;
+  gap:12px;
+  animation:rowIn .34s var(--ease) both;
+}
+@keyframes rowIn{
+  from{ opacity:0; transform:translateY(-8px); }
+  to{ opacity:1; transform:none; }
+}
+.guest.is-out{ animation:rowOut .24s var(--ease) both; }
+@keyframes rowOut{ to{ opacity:0; transform:translateY(-6px); } }
+
+.guest__n{
+  font-family:var(--serif);
+  font-size:16px;
+  color:var(--muted);
+  line-height:1;
+  padding-top:32px;
+  min-width:12px;
+  font-variant-numeric:tabular-nums;
+}
+
+.guest__fields{ display:grid; gap:12px; min-width:0; }
+@media (min-width:520px){ .guest__fields{ grid-template-columns:1fr 1fr; } }
+
+.field{ display:block; min-width:0; }
+.field__label{
+  display:block;
+  font-family:var(--sans);
+  font-size:10px;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-bottom:7px;
+}
+.field input{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid var(--line);
+  border-radius:0;
+  background:var(--paper);
+  font-family:var(--serif);
+  font-size:16px;   /* 16px prevents iOS zoom-on-focus */
+  font-weight:400;
+  color:var(--ink);
+  transition:border-color .25s var(--ease), background .25s var(--ease);
+}
+.field input::placeholder{ color:#9FB6C9; }
+.field input:focus{ outline:none; border-color:var(--ink); background:var(--white); }
+.field input.is-invalid{ border-color:var(--danger); background:#FBF3F1; }
+
+.guest__rm{
+  flex:none;
+  width:38px; height:46px;
+  margin-top:24px;
+  display:grid; place-items:center;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--muted);
+  cursor:pointer;
+  transition:border-color .25s var(--ease), color .25s var(--ease);
+}
+.guest__rm svg{ width:15px; height:15px; }
+.guest__rm:hover{ border-color:var(--danger); color:var(--danger); }
+.guest--first .guest__rm{ visibility:hidden; pointer-events:none; }
+
+.form__submit{ text-align:center; padding-top:6px; }
+.form__submit .btn{ min-width:220px; }
+
+
+/* ---------------------------------------------------------
+   Thanks state
+   --------------------------------------------------------- */
+.thanks{ text-align:center; }
+.thanks__icon{ color:var(--ink); margin-bottom:18px; }
+.thanks__icon svg{ width:46px; height:46px; margin-inline:auto; }
+.thanks__title{
+  margin:0 0 10px;
+  font-family:var(--serif);   /* հայերեն — տես countdown__done-ի նշումը */
+  font-weight:400;
+  font-size:clamp(24px,4.6vw,34px);
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink);
+}
+.thanks__text{ margin:0 0 26px; color:var(--ink-2); font-size:17.5px; }
+
+
+/* ---------------------------------------------------------
+   Footer
+   --------------------------------------------------------- */
+.footer{
+  background:var(--ink);
+  color:var(--paper);
+  text-align:center;
+  padding-block:clamp(64px,9vw,100px);
+}
+.footer__script{
+  margin:0;
+  font-family:var(--script);
+  font-size:clamp(38px,8vw,66px);
+  line-height:1.1;
+  color:var(--paper);
+}
+.footer .rule span{ background:rgba(var(--paper-rgb),.4); }
+.footer .rule i{ background:var(--paper); }
+.footer__line{
+  margin:0;
+  font-family:var(--sans);
+  font-size:10px;
+  letter-spacing:.34em;
+  text-transform:uppercase;
+  color:rgba(var(--paper-rgb),.65);
+}
+.footer__date{
+  margin:14px 0 0;
+  font-family:var(--serif);
+  font-size:16px;
+  letter-spacing:.32em;
+  color:rgba(var(--paper-rgb),.85);
+}
+
+
+/* ---------------------------------------------------------
+   Scroll reveal
+   --------------------------------------------------------- */
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .85s var(--ease), transform .85s var(--ease);
+}
+.reveal.is-in{ opacity:1; transform:none; }
+
+.noscript{
+  padding:16px 24px;
+  background:var(--ink);
+  color:var(--paper);
+  text-align:center;
+  font-size:15px;
+}
+
+
+/* ---------------------------------------------------------
+   Reduced motion
+   --------------------------------------------------------- */
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+  .reveal{ opacity:1; transform:none; }
+}
