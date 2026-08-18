@@ -404,7 +404,7 @@ button{ font:inherit; color:inherit; }
   /* Զույգի լուսանկարները բնօրինակում արդեն սև-սպիտակ են։
      grayscale-ը միայն հավասարեցնում է երանգը (մեկը սեպիա էր),
      պայծառությունը չի փոխում — չափված է՝ 153→153, 141→141։ */
-  filter:grayscale(1);
+  filter:saturate(1.04) contrast(1.02);
   transition:transform .8s var(--ease);
 }
 .gallery__item:hover img{ transform:scale(1.035); }
